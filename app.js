@@ -1,42 +1,33 @@
-const http = require('http');
-const { readFileSync } = require('fs');
-const homePage = readFileSync('./navbar-app/index.html');
-const homeStyles = readFileSync('./navbar-app/styles.css');
-const homeImage = readFileSync('./navbar-app/logo.svg');
-const homeLogic = readFileSync('./navbar-app/browser-app.js');
+const express = require('express');
+const app = express();
 
-const server = http.createServer((req, res) => {
-  const url = req.url;
-  if (url === '/') {
-    res.writeHead(200, { 'Content-Type': 'text/html' });
-    res.write(homePage);
+//app.get
+//app.post
+//app.put
+//app.delete
+//app.all
+//app.use
+//app.listen
+//app.set
 
-    res.end();
-  } else if (url === '/styles.css') {
-    res.writeHead(200, { 'Content-Type': 'text/css' });
-    res.write(homeStyles);
-
-    res.end();
-  } else if (url === '/browser-app.js') {
-    res.writeHead(200, { 'Content-Type': 'text/js' });
-    res.write(homeLogic);
-
-    res.end();
-  } else if (url === '/logo.svg') {
-    res.writeHead(200, { 'Content-Type': 'image/svg+xml' });
-    res.write(homeImage);
-
-    res.end();
-  } else {
-    res.writeHead(404, { 'Content-Type': 'text/html' });
-    res.write(
-      '<body style="background:black"><h2 style="color:white">404 Not Found</h2></body>'
-    );
-
-    res.end();
-  }
+app.get('/', function (req, res) {
+  res.status(200).send('Home Page');
 });
 
-server.listen(5000, () => {
-  console.log('Server is running on port 3000');
+app.get('/about', function (req, res) {
+  res.status(200).send('About Page');
+});
+
+app.get('/contact', function (req, res) {
+  res.status(200).send('Contact Page');
+});
+
+app.all('*', function (req, res) {
+  res.status(404).send('<h2>404 Page not found</h2>');
+});
+
+const port = 5000;
+
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
 });
