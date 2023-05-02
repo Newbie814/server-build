@@ -23,7 +23,7 @@ const server = http.createServer((req, res) => {
 
     res.end();
   } else if (url === '/logo.svg') {
-    res.writeHead(200, { 'Content-Type': 'text/svg' });
+    res.writeHead(200, { 'Content-Type': 'image/svg+xml' });
     res.write(homeImage);
 
     res.end();
