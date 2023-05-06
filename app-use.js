@@ -1,23 +1,19 @@
 const express = require('express');
 const app = express();
 const logger = require('./logger-middleware.js');
-const authorize = require('./authorize-middleware.js');
 const port = 5000;
 
 // req => middleware => res
 
 // app.use(logger);  //invokes on all routes
 
-// app.use('/api', logger); //invokes on all routes starting with /api
-
-app.use([logger, authorize]); //invokes multiple middlewares on all routes. executed in order
+app.use('/api', logger); //invokes on all routes starting with /api
 
 app.get('/', (req, res) => {
   res.send('Home Page');
 });
 
 app.get('/about', (req, res) => {
-  console.log(req.user);
   res.send('About Page');
 });
 
