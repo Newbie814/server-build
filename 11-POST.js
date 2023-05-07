@@ -33,16 +33,6 @@ app.post('/login', (req, res) => {
   }
 });
 
-app.post('/api/postman/people', (req, res) => {
-  const { name } = req.body;
-  if (!name) {
-    return res
-      .status(400)
-      .json({ success: false, msg: 'please provide name value' });
-  }
-  res.status(201).json({ success: true, data: [...people, name] });
-});
-
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
