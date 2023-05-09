@@ -10,14 +10,15 @@ const {
   deletePerson,
 } = require('../controllers/router-controllers');
 
-router.get('/', getPeople);
+// router.get('/', getPeople);
+// router.post('/', createPerson);
+// router.put('/:id', updatePerson);
+// router.delete('/:id', deletePerson);
+// router.post('/postman', createPersonPostman);
 
-router.post('/', createPerson);
-
-router.put('/:id', updatePerson);
-
-router.delete('/:id', deletePerson);
-
-router.post('/postman', createPersonPostman);
+// alternative syntax
+router.route('/').get(getPeople).post(createPerson);
+router.route('/:id').put(updatePerson).delete(deletePerson);
+router.route('/postman').post(createPersonPostman);
 
 module.exports = router;
